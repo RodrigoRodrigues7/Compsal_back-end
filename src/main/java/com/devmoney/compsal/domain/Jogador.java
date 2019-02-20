@@ -13,36 +13,89 @@ public class Jogador implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
+	
 	private String nome;
+	private String numeroCamisa;
+	private Integer qtdGols;
+	private Integer numeroFaltas;
+	private Integer qtdCartaoAmarelo;
+	private Integer qtdCartaoVermelho;
 	
 	public Jogador() {
-	}
-	
-	public Jogador(int id, String nome) {
+	}	
+
+	public Jogador(Integer id, String numeroCamisa, Integer qtdGols, Integer numeroFaltas, Integer qtdCartaoAmarelo, Integer qtdCartaoVermelho) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.numeroCamisa = numeroCamisa;
+		this.qtdGols = qtdGols;
+		this.numeroFaltas = numeroFaltas;
+		this.qtdCartaoAmarelo = qtdCartaoAmarelo;
+		this.qtdCartaoVermelho = qtdCartaoVermelho;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getNumeroCamisa() {
+		return numeroCamisa;
+	}
+
+	public void setNumeroCamisa(String numeroCamisa) {
+		this.numeroCamisa = numeroCamisa;
+	}
+
+	public Integer getQtdGols() {
+		return qtdGols;
+	}
+
+	public void setQtdGols(Integer qtdGols) {
+		this.qtdGols = qtdGols;
+	}
+
+	public Integer getNumeroFaltas() {
+		return numeroFaltas;
+	}
+
+	public void setNumeroFaltas(Integer numeroFaltas) {
+		this.numeroFaltas = numeroFaltas;
+	}
+
+	public Integer getQtdCartaoAmarelo() {
+		return qtdCartaoAmarelo;
+	}
+
+	public void setQtdCartaoAmarelo(Integer qtdCartaoAmarelo) {
+		this.qtdCartaoAmarelo = qtdCartaoAmarelo;
+	}
+
+	public Integer getQtdCartaoVermelho() {
+		return qtdCartaoVermelho;
+	}
+
+	public void setQtdCartaoVermelho(Integer qtdCartaoVermelho) {
+		this.qtdCartaoVermelho = qtdCartaoVermelho;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -55,9 +108,12 @@ public class Jogador implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Jogador other = (Jogador) obj;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-		
+	
 }
