@@ -33,7 +33,6 @@ public abstract class Usuario implements Serializable {
 	private Set<Integer> perfis = new HashSet<>();
 	
 	public Usuario() {
-		addPerfil(PerfilUsuario.COMUN);
 	}
 
 	public Usuario(Integer id, String nome, String email, String telefone) {
@@ -42,7 +41,6 @@ public abstract class Usuario implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
-		addPerfil(PerfilUsuario.COMUN);
 	}
 
 	public Integer getId() {

@@ -8,9 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.devmoney.compsal.Repository.AnotadorRepository;
+import com.devmoney.compsal.Repository.ArbitroRepository;
 import com.devmoney.compsal.Repository.SumulaRepository;
 import com.devmoney.compsal.domain.Anotador;
+import com.devmoney.compsal.domain.Arbitro;
 import com.devmoney.compsal.domain.Sumula;
+import com.devmoney.compsal.domain.enums.FuncaoArbitro;
 import com.devmoney.compsal.domain.enums.PerfilUsuario;
 
 @SpringBootApplication
@@ -19,7 +22,9 @@ public class CompsalBackendApplication implements CommandLineRunner {
 	@Autowired
 	private AnotadorRepository anotadorRepository;
 	@Autowired
-	private SumulaRepository sumulaRepository ;
+	private SumulaRepository sumulaRepository;
+	@Autowired
+	private ArbitroRepository arbitroRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CompsalBackendApplication.class, args);
@@ -41,6 +46,13 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		anotadorRepository.saveAll(Arrays.asList(ano1, ano2));
 		sumulaRepository.saveAll(Arrays.asList(sumu1, sumu2, sumu3));
 		
+		Arbitro arb1 = new Arbitro(null , "Emmanuel Andrade");
+		arb1.addFuncao(FuncaoArbitro.PRINCIPAL);
+		
+		Arbitro arb2 = new Arbitro(null , "Miguel Borges");
+		arb2.addFuncao(FuncaoArbitro.AUXILIAR);
+		
+		arbitroRepository.saveAll(Arrays.asList(arb1, arb2));
 	}
 	
 	

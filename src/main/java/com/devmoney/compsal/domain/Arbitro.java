@@ -1,31 +1,39 @@
 package com.devmoney.compsal.domain;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.devmoney.compsal.domain.enums.FuncaoArbitro;
 
 @Entity
 public class Arbitro implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-
 	private String nome;
-	private String funcao;
-
+	
+	@ElementCollection
+	@CollectionTable(name="FUNCOES")
+	private Set<Integer> funcao = new HashSet<>();
+	
 	public Arbitro() {
 	}
 
-	public Arbitro(Integer id, String nome, String funcao) {
+	public Arbitro(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.funcao = funcao;
 	}
 
 	public Integer getId() {
@@ -44,12 +52,12 @@ public class Arbitro implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getFuncao() {
-		return funcao;
+	public Set<FuncaoArbitro> getFuncao() {
+		return funcao.stream().map(x -> FuncaoArbitro.toEnum(x)).collect(Collectors.toSet());
 	}
-
-	public void setFuncao(String funcao) {
-		this.funcao = funcao;
+	
+	public void addFuncao(FuncaoArbitro funcaoArbitro) {
+		funcao.add(funcaoArbitro.getCodigo());
 	}
 
 	@Override
