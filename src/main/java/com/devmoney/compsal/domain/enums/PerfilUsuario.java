@@ -5,8 +5,7 @@ public enum PerfilUsuario {
 	COMUN(1, "ROLE_COMUN"),
 	TECNICO(2, "ROLE_TECNICO"),
 	ANOTADOR(3, "ROLE_ANOTADOR"),
-	ARBITRO(4, "ROLE_ARBITRO"),
-	GESTOR(5, "ROLE_GESTOR");
+	GESTOR(4, "ROLE_GESTOR");
 	
 	
 	private int codigo;

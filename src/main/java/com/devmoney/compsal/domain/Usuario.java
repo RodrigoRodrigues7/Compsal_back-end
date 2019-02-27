@@ -1,13 +1,8 @@
 package com.devmoney.compsal.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,20 +22,18 @@ public abstract class Usuario implements Serializable {
 	@Column(unique=true)
 	private String email;
 	private String telefone;
-	
-	@ElementCollection
-	@CollectionTable(name="PERFIS")
-	private Set<Integer> perfis = new HashSet<>();
+	private Integer perfil;
 	
 	public Usuario() {
 	}
 
-	public Usuario(Integer id, String nome, String email, String telefone) {
+	public Usuario(Integer id, String nome, String email, String telefone, PerfilUsuario perfil) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
+		this.perfil = (perfil==null) ? null : perfil.getCodigo();
 	}
 
 	public Integer getId() {
@@ -75,12 +68,12 @@ public abstract class Usuario implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public Set<PerfilUsuario> getPerfis() {
-		return perfis.stream().map(x -> PerfilUsuario.toEnum(x)).collect(Collectors.toSet());
+	public PerfilUsuario getPerfilUsuario() {
+		return PerfilUsuario.toEnum(perfil);
 	}
-	
-	public void addPerfil(PerfilUsuario perfilUsuario) {
-		perfis.add(perfilUsuario.getCodigo());
+
+	public void setPerfilUsuario(PerfilUsuario perfil) {
+		this.perfil = perfil.getCodigo();
 	}
 
 	@Override

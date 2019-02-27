@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import com.devmoney.compsal.domain.enums.PerfilUsuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -19,8 +20,8 @@ public class Anotador extends Usuario {
 	public Anotador() {
 	}
 
-	public Anotador(Integer id, String nome, String email, String telefone) {
-		super(id, nome, email, telefone);
+	public Anotador(Integer id, String nome, String email, String telefone, PerfilUsuario perfil) {
+		super(id, nome, email, telefone, perfil);
 	}
 
 	public List<Sumula> getSumulas() {

@@ -33,11 +33,8 @@ public class CompsalBackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Anotador ano1 = new Anotador(null, "Vinicius da Silva", "viniSil@gmail.com", "34455466");
-		ano1.addPerfil(PerfilUsuario.ANOTADOR);
-		
-		Anotador ano2 = new Anotador(null, "Henrique Ferreira", "heriqueF@gmail.com", "54465766");
-		ano2.addPerfil(PerfilUsuario.ANOTADOR);
+		Anotador ano1 = new Anotador(null, "Vinicius da Silva", "viniSil@gmail.com", "34455466", PerfilUsuario.ANOTADOR);
+		Anotador ano2 = new Anotador(null, "Henrique Ferreira", "heriqueF@gmail.com", "54465766", PerfilUsuario.ANOTADOR);
 		
 		Sumula sumu1 = new Sumula(null, "Campeonato Pernambucano de Futsal S1", "1", "Santa Cruz", "Sport", ano1);
 		Sumula sumu2 = new Sumula(null, "Campeonato PE Junior de Futsal", "3", "Nautico", "Carcará", ano1);
