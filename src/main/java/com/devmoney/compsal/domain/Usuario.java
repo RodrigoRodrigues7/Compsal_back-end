@@ -36,7 +36,7 @@ public abstract class Usuario implements Serializable {
 		addPerfil(PerfilUsuario.COMUN);
 	}
 
-	public Usuario(Integer id, String nome, String email, String telefone, Set<Integer> perfis) {
+	public Usuario(Integer id, String nome, String email, String telefone) {
 		super();
 		this.id = id;
 		this.nome = nome;
