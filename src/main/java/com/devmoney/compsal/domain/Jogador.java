@@ -22,6 +22,7 @@ public class Jogador implements Serializable {
 	private String nome;
 	private String numeroCamisa;
 	private Integer qtdGols;
+	private Boolean isCapitao;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -31,13 +32,14 @@ public class Jogador implements Serializable {
 	public Jogador() {
 	}	
 
-	public Jogador(Integer id, String nome, String numeroCamisa, Integer qtdGols, Equipe idEquipe) {
+	public Jogador(Integer id, String nome, String numeroCamisa, Integer qtdGols, Equipe idEquipe, Boolean isCapitao) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.numeroCamisa = numeroCamisa;
 		this.qtdGols = qtdGols;
 		this.equipe = idEquipe;
+		this.isCapitao = isCapitao;
 	}
 
 	public Integer getId() {
@@ -71,7 +73,7 @@ public class Jogador implements Serializable {
 	public void setQtdGols(Integer qtdGols) {
 		this.qtdGols = qtdGols;
 	}
-	
+
 	public Equipe getEquipe() {
 		return equipe;
 	}
@@ -80,6 +82,14 @@ public class Jogador implements Serializable {
 		this.equipe = equipe;
 	}
 
+	public Boolean getIsCapitao() {
+		return isCapitao;
+	}
+
+	public void setIsCapitao(Boolean isCapitao) {
+		this.isCapitao = isCapitao;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

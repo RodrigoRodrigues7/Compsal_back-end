@@ -30,6 +30,9 @@ public class Equipe implements Serializable {
 	@OneToMany(mappedBy="equipe")
 	private List<Jogador> jogadores = new ArrayList<>();
 	
+	@OneToMany(mappedBy="equipe")
+	private List<ResolucaoEquipe> resolucoes = new ArrayList<>();
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="FK_Id_Sumula")
@@ -96,6 +99,14 @@ public class Equipe implements Serializable {
 		this.jogadores = jogadores;
 	}
 	
+	public List<ResolucaoEquipe> getResolucoes() {
+		return resolucoes;
+	}
+
+	public void setResolucoes(List<ResolucaoEquipe> resolucoes) {
+		this.resolucoes = resolucoes;
+	}
+
 	public Sumula getSumula() {
 		return sumula;
 	}
