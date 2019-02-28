@@ -10,9 +10,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.devmoney.compsal.Repository.AnotadorRepository;
 import com.devmoney.compsal.Repository.ArbitroRepository;
+import com.devmoney.compsal.Repository.EquipeRepository;
+import com.devmoney.compsal.Repository.JogadorRepository;
 import com.devmoney.compsal.Repository.SumulaRepository;
 import com.devmoney.compsal.domain.Anotador;
 import com.devmoney.compsal.domain.Arbitro;
+import com.devmoney.compsal.domain.Equipe;
+import com.devmoney.compsal.domain.Jogador;
 import com.devmoney.compsal.domain.Sumula;
 import com.devmoney.compsal.domain.enums.FuncaoArbitro;
 import com.devmoney.compsal.domain.enums.PerfilUsuario;
@@ -26,7 +30,12 @@ public class CompsalBackendApplication implements CommandLineRunner {
 	private SumulaRepository sumulaRepository;
 	@Autowired
 	private ArbitroRepository arbitroRepository;
-
+	@Autowired
+	private EquipeRepository equipeRepository;
+	@Autowired
+	private JogadorRepository jogadorRepository;
+	
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CompsalBackendApplication.class, args);
 	}
@@ -40,7 +49,9 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		Anotador ano2 = new Anotador(null, "Henrique Ferreira", "heriqueF@gmail.com", "54465766",PerfilUsuario.ANOTADOR);
 
 		anotadorRepository.saveAll(Arrays.asList(ano1, ano2));
-
+		
+//-----------------------------------------------------------------------------------------------------------------------------
+		
 		Arbitro arb1 = new Arbitro(null, "Emmanuel Andrade");
 		arb1.addFuncao(FuncaoArbitro.PRINCIPAL);
 
@@ -54,6 +65,36 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		
 		arbitroRepository.saveAll(Arrays.asList(arb1, arb2));
 		sumulaRepository.saveAll(Arrays.asList(sumu1));
+		
+//-----------------------------------------------------------------------------------------------------------------------------
+		
+		Equipe equipe1 = new Equipe(null, "Sport", "Zé Braga Neto", "Felipe Souza", "Sérgio Menesez");
+		
+		Jogador jog1 = new Jogador(null, "Romário", "11", 14, equipe1);
+		Jogador jog2 = new Jogador(null, "Pelépo", "10", 4, equipe1);
+		Jogador jog3 = new Jogador(null, "Ronaldinho Baihano", "17", 10, equipe1);
+		Jogador jog4 = new Jogador(null, "Romero Brita", "22", 24, equipe1);
+		Jogador jog5 = new Jogador(null, "Ziico", "6", 18, equipe1);
+		
+		equipe1.getJogadores().addAll(Arrays.asList(jog1, jog2, jog3, jog4, jog5));
+		
+		equipeRepository.saveAll(Arrays.asList(equipe1));
+		jogadorRepository.saveAll(Arrays.asList(jog1, jog2, jog3, jog4, jog5));
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

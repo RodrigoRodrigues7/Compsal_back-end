@@ -6,6 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Jogador implements Serializable {
@@ -18,21 +22,22 @@ public class Jogador implements Serializable {
 	private String nome;
 	private String numeroCamisa;
 	private Integer qtdGols;
-	private Integer numeroFaltas;
-	private Integer qtdCartaoAmarelo;
-	private Integer qtdCartaoVermelho;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="FK_Id_Equipe")
+	private Equipe equipe;
 	
 	public Jogador() {
 	}	
 
-	public Jogador(Integer id, String numeroCamisa, Integer qtdGols, Integer numeroFaltas, Integer qtdCartaoAmarelo, Integer qtdCartaoVermelho) {
+	public Jogador(Integer id, String nome, String numeroCamisa, Integer qtdGols, Equipe idEquipe) {
 		super();
 		this.id = id;
+		this.nome = nome;
 		this.numeroCamisa = numeroCamisa;
 		this.qtdGols = qtdGols;
-		this.numeroFaltas = numeroFaltas;
-		this.qtdCartaoAmarelo = qtdCartaoAmarelo;
-		this.qtdCartaoVermelho = qtdCartaoVermelho;
+		this.equipe = idEquipe;
 	}
 
 	public Integer getId() {
@@ -66,29 +71,13 @@ public class Jogador implements Serializable {
 	public void setQtdGols(Integer qtdGols) {
 		this.qtdGols = qtdGols;
 	}
-
-	public Integer getNumeroFaltas() {
-		return numeroFaltas;
+	
+	public Equipe getEquipe() {
+		return equipe;
 	}
 
-	public void setNumeroFaltas(Integer numeroFaltas) {
-		this.numeroFaltas = numeroFaltas;
-	}
-
-	public Integer getQtdCartaoAmarelo() {
-		return qtdCartaoAmarelo;
-	}
-
-	public void setQtdCartaoAmarelo(Integer qtdCartaoAmarelo) {
-		this.qtdCartaoAmarelo = qtdCartaoAmarelo;
-	}
-
-	public Integer getQtdCartaoVermelho() {
-		return qtdCartaoVermelho;
-	}
-
-	public void setQtdCartaoVermelho(Integer qtdCartaoVermelho) {
-		this.qtdCartaoVermelho = qtdCartaoVermelho;
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
 	}
 
 	@Override
