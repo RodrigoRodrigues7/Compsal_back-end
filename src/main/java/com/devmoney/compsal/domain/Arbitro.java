@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import com.devmoney.compsal.domain.enums.FuncaoArbitro;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Arbitro implements Serializable {
@@ -26,6 +27,7 @@ public class Arbitro implements Serializable {
 	private Integer id;
 	private String nome;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy="arbitros")
 	private List<Sumula> sumulas = new ArrayList<>();
 	

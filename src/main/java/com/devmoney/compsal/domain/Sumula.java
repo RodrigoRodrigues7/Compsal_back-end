@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Sumula implements Serializable {
@@ -35,7 +34,6 @@ public class Sumula implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date data;
 	
-	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="SUMULA_ARBITRO",
 				joinColumns = @JoinColumn(name="PK_Id_Sumula"),
