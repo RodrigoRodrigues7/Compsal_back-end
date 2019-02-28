@@ -1,7 +1,9 @@
 package com.devmoney.compsal.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import com.devmoney.compsal.domain.enums.FuncaoArbitro;
 
@@ -22,6 +25,9 @@ public class Arbitro implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
+	@ManyToMany(mappedBy="arbitros")
+	private List<Sumula> sumulas = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name="FUNCOES")
@@ -58,6 +64,14 @@ public class Arbitro implements Serializable {
 	
 	public void addFuncao(FuncaoArbitro funcaoArbitro) {
 		funcao.add(funcaoArbitro.getCodigo());
+	}
+	
+	public List<Sumula> getSumulas() {
+		return sumulas;
+	}
+
+	public void setSumulas(List<Sumula> sumulas) {
+		this.sumulas = sumulas;
 	}
 
 	@Override

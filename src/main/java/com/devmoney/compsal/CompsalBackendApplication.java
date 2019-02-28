@@ -1,5 +1,6 @@
 package com.devmoney.compsal;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,33 +26,34 @@ public class CompsalBackendApplication implements CommandLineRunner {
 	private SumulaRepository sumulaRepository;
 	@Autowired
 	private ArbitroRepository arbitroRepository;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(CompsalBackendApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
 		Anotador ano1 = new Anotador(null, "Vinicius da Silva", "viniSil@gmail.com", "34455466", PerfilUsuario.ANOTADOR);
-		Anotador ano2 = new Anotador(null, "Henrique Ferreira", "heriqueF@gmail.com", "54465766", PerfilUsuario.ANOTADOR);
-		
-		Sumula sumu1 = new Sumula(null, "Campeonato Pernambucano de Futsal S1", "1", "Santa Cruz", "Sport", ano1);
-		Sumula sumu2 = new Sumula(null, "Campeonato PE Junior de Futsal", "3", "Nautico", "Carcará", ano1);
-		Sumula sumu3 = new Sumula(null, "Campeonato Nacional de Futsal Ligua 1", "12", "Bahia", "Vasco", ano2);
-		
+		Anotador ano2 = new Anotador(null, "Henrique Ferreira", "heriqueF@gmail.com", "54465766",PerfilUsuario.ANOTADOR);
+
 		anotadorRepository.saveAll(Arrays.asList(ano1, ano2));
-		sumulaRepository.saveAll(Arrays.asList(sumu1, sumu2, sumu3));
-		
-		Arbitro arb1 = new Arbitro(null , "Emmanuel Andrade");
+
+		Arbitro arb1 = new Arbitro(null, "Emmanuel Andrade");
 		arb1.addFuncao(FuncaoArbitro.PRINCIPAL);
-		
-		Arbitro arb2 = new Arbitro(null , "Miguel Borges");
+
+		Arbitro arb2 = new Arbitro(null, "Miguel Borges");
 		arb2.addFuncao(FuncaoArbitro.AUXILIAR);
 		
+		Sumula sumu1 = new Sumula(null, "Campeonato Pernambucano de Futsal S1", "1", "Santa Cruz", "Sport", "Sub-20", "Geraldão", "Recife", 
+				sdf.parse("27/02/2019 21:20"), ano1);
+		
+		sumu1.getArbitros().addAll(Arrays.asList(arb1, arb2));
+		
 		arbitroRepository.saveAll(Arrays.asList(arb1, arb2));
+		sumulaRepository.saveAll(Arrays.asList(sumu1));
 	}
-	
-	
-}
 
+}
