@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,9 +28,6 @@ public class Sumula implements Serializable {
 	
 	private String nomeCompeticao;
 	private String jogoNumero;
-	private String equipeA;
-	private String equipeB;
-	
 	private String categoria;
 	private String ginasio;
 	private String cidade;
@@ -48,17 +46,17 @@ public class Sumula implements Serializable {
 	@JoinColumn(name="FK_Id_Anotador")
 	private Anotador anotador;
 	
+	@OneToMany(mappedBy="sumula")
+	private List<Equipe> equipes = new ArrayList<>();
+	
 	public Sumula() {
 	}
-
-	public Sumula(Integer id, String nomeCompeticao, String jogoNumero, String equipeA, String equipeB, String categoria, 
-			String ginasio, String cidade, Date data, Anotador anotador) {
+	
+	public Sumula(Integer id, String nomeCompeticao, String jogoNumero,String categoria, String ginasio, String cidade, Date data, Anotador anotador) {
 		super();
 		this.id = id;
 		this.nomeCompeticao = nomeCompeticao;
 		this.jogoNumero = jogoNumero;
-		this.equipeA = equipeA;
-		this.equipeB = equipeB;
 		this.categoria = categoria;
 		this.ginasio = ginasio;
 		this.cidade = cidade;
@@ -81,7 +79,7 @@ public class Sumula implements Serializable {
 	public void setNomeCompeticao(String nomeCompeticao) {
 		this.nomeCompeticao = nomeCompeticao;
 	}
-
+	
 	public String getJogoNumero() {
 		return jogoNumero;
 	}
@@ -90,22 +88,6 @@ public class Sumula implements Serializable {
 		this.jogoNumero = jogoNumero;
 	}
 
-	public String getEquipeA() {
-		return equipeA;
-	}
-
-	public void setEquipeA(String equipeA) {
-		this.equipeA = equipeA;
-	}
-
-	public String getEquipeB() {
-		return equipeB;
-	}
-
-	public void setEquipeB(String equipeB) {
-		this.equipeB = equipeB;
-	}	
-	
 	public Anotador getAnotador() {
 		return anotador;
 	}
@@ -153,9 +135,16 @@ public class Sumula implements Serializable {
 	public void setArbitros(List<Arbitro> arbitros) {
 		this.arbitros = arbitros;
 	}
+	
+	public List<Equipe> getEquipes() {
+		return equipes;
+	}
 
-	
-	
+
+	public void setEquipes(List<Equipe> equipes) {
+		this.equipes = equipes;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
