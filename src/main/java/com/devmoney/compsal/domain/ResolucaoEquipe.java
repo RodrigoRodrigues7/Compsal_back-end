@@ -28,16 +28,20 @@ public class ResolucaoEquipe implements Serializable {
 	private String tecnico;
 	private String jogadorCapitao;
 	
+	@ManyToOne
+	@JoinColumn(name="Equipe_Id")
+	private Equipe equipe;
+	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="FK_Id_Equipe")
-	private Equipe equipe;
+	@JoinColumn(name="Sumula_Id")
+	private Sumula sumula;
 	
 	public ResolucaoEquipe() {
 	}
 
 	public ResolucaoEquipe(Integer id, Integer faltasAcumulativas1Periodo, Integer faltasAcumulativas2Periodo,
-			Integer pedidosDeTempo1Periodo, Integer pedidosDeTempo2Periodo, Integer gols, String tecnico,
+			Integer pedidosDeTempo1Periodo, Integer pedidosDeTempo2Periodo, Integer gols,
 			Equipe equipe) {
 		super();
 		this.id = id;
@@ -46,7 +50,6 @@ public class ResolucaoEquipe implements Serializable {
 		this.pedidosDeTempo1Periodo = pedidosDeTempo1Periodo;
 		this.pedidosDeTempo2Periodo = pedidosDeTempo2Periodo;
 		this.gols = gols;
-		this.tecnico = tecnico;
 		this.equipe = equipe;
 	}
 
@@ -120,6 +123,14 @@ public class ResolucaoEquipe implements Serializable {
 
 	public void setEquipe(Equipe equipe) {
 		this.equipe = equipe;
+	}
+
+	public Sumula getSumula() {
+		return sumula;
+	}
+
+	public void setSumula(Sumula sumula) {
+		this.sumula = sumula;
 	}
 
 	@Override

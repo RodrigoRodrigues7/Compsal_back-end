@@ -26,7 +26,7 @@ public class Jogador implements Serializable {
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="FK_Id_Equipe")
+	@JoinColumn(name="Equipe_Id")
 	private Equipe equipe;
 	
 	public Jogador() {

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,29 +24,32 @@ public class Equipe implements Serializable {
 	private Integer id;
 	
 	private String nome;
-	private String tecnico;
 	private String massagista;
 	private String preparadorFisico;
+	
+	@OneToOne
+	@JoinColumn(name="Tecnico_Id")
+	private Tecnico tecnico;
 	
 	@OneToMany(mappedBy="equipe")
 	private List<Jogador> jogadores = new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="equipe")
 	private List<ResolucaoEquipe> resolucoes = new ArrayList<>();
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="FK_Id_Sumula")
+	@JoinColumn(name="Sumula_Id")
 	private Sumula sumula;
 	
 	public Equipe() {
 	}
 
-	public Equipe(Integer id, String nome, String tecnico, String massagista, String preparadorFisico, Sumula sumula) {
+	public Equipe(Integer id, String nome, String massagista, String preparadorFisico, Sumula sumula) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.tecnico = tecnico;
 		this.massagista = massagista;
 		this.preparadorFisico = preparadorFisico;
 		this.sumula = sumula;
@@ -66,15 +70,7 @@ public class Equipe implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public String getTecnico() {
-		return tecnico;
-	}
-
-	public void setTecnico(String tecnico) {
-		this.tecnico = tecnico;
-	}
-
+	
 	public String getMassagista() {
 		return massagista;
 	}
@@ -91,6 +87,14 @@ public class Equipe implements Serializable {
 		this.preparadorFisico = preparadorFisico;
 	}
 	
+	public Tecnico getTecnico() {
+		return tecnico;
+	}
+
+	public void setTecnico(Tecnico tecnico) {
+		this.tecnico = tecnico;
+	}
+
 	public List<Jogador> getJogadores() {
 		return jogadores;
 	}

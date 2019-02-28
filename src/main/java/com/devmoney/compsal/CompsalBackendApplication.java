@@ -14,12 +14,14 @@ import com.devmoney.compsal.Repository.EquipeRepository;
 import com.devmoney.compsal.Repository.JogadorRepository;
 import com.devmoney.compsal.Repository.ResolucaoEquipeRepository;
 import com.devmoney.compsal.Repository.SumulaRepository;
+import com.devmoney.compsal.Repository.TecnicoRepository;
 import com.devmoney.compsal.domain.Anotador;
 import com.devmoney.compsal.domain.Arbitro;
 import com.devmoney.compsal.domain.Equipe;
 import com.devmoney.compsal.domain.Jogador;
 import com.devmoney.compsal.domain.ResolucaoEquipe;
 import com.devmoney.compsal.domain.Sumula;
+import com.devmoney.compsal.domain.Tecnico;
 import com.devmoney.compsal.domain.enums.FuncaoArbitro;
 import com.devmoney.compsal.domain.enums.PerfilUsuario;
 
@@ -28,6 +30,8 @@ public class CompsalBackendApplication implements CommandLineRunner {
 
 	@Autowired
 	private AnotadorRepository anotadorRepository;
+	@Autowired
+	private TecnicoRepository tecnicoRepository;
 	@Autowired
 	private SumulaRepository sumulaRepository;
 	@Autowired
@@ -59,8 +63,12 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		arb2.addFuncao(FuncaoArbitro.AUXILIAR);
 		
 		Sumula sumu1 = new Sumula(null, "Campeonato Pernambucano de Futsal S1", "1", "Sub-20", "Geraldão", "Recife", sdf.parse("27/02/2019 21:20"), ano1);
-				
-		Equipe equipeA = new Equipe(null, "Sport", "Zé Braga Neto", "Felipe Souza", "Sérgio Menesez", sumu1);
+		
+		Tecnico tecA = new Tecnico(null, "Zé Braga Neto", "zeze@gmail.com", "55566448", PerfilUsuario.TECNICO);
+		Tecnico tecB = new Tecnico(null, "Birimba", "birimbal123@gmail.com", "46789932", PerfilUsuario.TECNICO);
+		
+//		Equipe equipeA = new Equipe(null, "Sport", "Zé Braga Neto", "Felipe Souza", "Sérgio Menesez", sumu1);
+		Equipe equipeA = new Equipe(null, "Sport", "Felipe Souza", "Sérgio Menesez", sumu1);
 		
 		Jogador joga1 = new Jogador(null, "Romário", "11", 14, equipeA, false);
 		Jogador joga2 = new Jogador(null, "Pelépo", "10", 4, equipeA, true);
@@ -69,8 +77,11 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		Jogador joga5 = new Jogador(null, "Ziico", "6", 18, equipeA, false);
 		
 		equipeA.getJogadores().addAll(Arrays.asList(joga1, joga2, joga3, joga4, joga5));
+		equipeA.setTecnico(tecA);
+		tecA.setEquipe(equipeA);
 		
-		Equipe equipeB = new Equipe(null, "Santa Cruz", "Birimba", "Hernesto Mathias", "Flávio Assunção", sumu1);
+//		Equipe equipeB = new Equipe(null, "Santa Cruz", "Birimba", "Hernesto Mathias", "Flávio Assunção", sumu1);
+		Equipe equipeB = new Equipe(null, "Santa Cruz", "Hernesto Mathias", "Flávio Assunção", sumu1);
 		
 		Jogador jogb1 = new Jogador(null, "Fernando", "1", 0, equipeB, false);
 		Jogador jogb2 = new Jogador(null, "Nelson", "13", 15, equipeB, false);
@@ -78,19 +89,28 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		Jogador jogb4 = new Jogador(null, "Ariano", "5", 8, equipeB, false);
 		Jogador jogb5 = new Jogador(null, "Alceu", "20", 30, equipeB, false);
 		
-		equipeA.getJogadores().addAll(Arrays.asList(jogb1, jogb2, jogb3, jogb4, jogb5));
+		equipeB.getJogadores().addAll(Arrays.asList(jogb1, jogb2, jogb3, jogb4, jogb5));
+		equipeB.setTecnico(tecB);
+		tecB.setEquipe(equipeB);
 		
 		sumu1.getArbitros().addAll(Arrays.asList(arb1, arb2));
 		sumu1.getEquipes().addAll(Arrays.asList(equipeA, equipeB));
 		
-		ResolucaoEquipe resEquipeA = new ResolucaoEquipe(null, 2, 0, 1, 1, 6, "Birimba", equipeA);
-		ResolucaoEquipe resEquipeB = new ResolucaoEquipe(null, 0, 1, 3, 2, 12, "Zé Braga Neto", equipeB);		
+		ResolucaoEquipe resEquipeA = new ResolucaoEquipe(null, 2, 0, 1, 1, 6, equipeA);
+		ResolucaoEquipe resEquipeB = new ResolucaoEquipe(null, 0, 1, 3, 2, 12, equipeB);		
 		
 		resEquipeA.setJogadorCapitao(joga2.getNome());
+		resEquipeA.setTecnico(tecA.getNome());
+		resEquipeA.setSumula(sumu1);
+		
 		resEquipeB.setJogadorCapitao(jogb3.getNome());
+		resEquipeB.setTecnico(tecB.getNome());
+		resEquipeB.setSumula(sumu1);
 		
 		equipeA.getResolucoes().addAll(Arrays.asList(resEquipeA));
 		equipeB.getResolucoes().addAll(Arrays.asList(resEquipeB));
+		
+		sumu1.getResolucoes().addAll(Arrays.asList(resEquipeA, resEquipeB));
 		
 //---------------------------------------------------------------------------------------------------------		
 		
@@ -99,7 +119,9 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		arbitroRepository.saveAll(Arrays.asList(arb1, arb2));
 		sumulaRepository.saveAll(Arrays.asList(sumu1));
 		
+		tecnicoRepository.saveAll(Arrays.asList(tecA, tecB));
 		equipeRepository.saveAll(Arrays.asList(equipeA, equipeB));
+		
 		resEquipeRepository.saveAll(Arrays.asList(resEquipeA, resEquipeB));
 		jogadorRepository.saveAll(Arrays.asList(joga1, joga2, joga3, joga4, joga5, jogb1, jogb2, jogb3, jogb4, jogb5));
 	}

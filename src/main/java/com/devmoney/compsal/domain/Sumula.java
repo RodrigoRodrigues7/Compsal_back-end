@@ -41,11 +41,14 @@ public class Sumula implements Serializable {
 	private List<Arbitro> arbitros = new ArrayList<>();
 	
 	@ManyToOne
-	@JoinColumn(name="FK_Id_Anotador")
+	@JoinColumn(name="Anotador_Id")
 	private Anotador anotador;
 	
 	@OneToMany(mappedBy="sumula")
 	private List<Equipe> equipes = new ArrayList<>();
+	
+	@OneToMany(mappedBy="sumula")
+	private List<ResolucaoEquipe> resolucoes = new ArrayList<>();
 	
 	public Sumula() {
 	}
@@ -141,6 +144,14 @@ public class Sumula implements Serializable {
 
 	public void setEquipes(List<Equipe> equipes) {
 		this.equipes = equipes;
+	}
+
+	public List<ResolucaoEquipe> getResolucoes() {
+		return resolucoes;
+	}
+
+	public void setResolucoes(List<ResolucaoEquipe> resolucoes) {
+		this.resolucoes = resolucoes;
 	}
 
 	@Override
