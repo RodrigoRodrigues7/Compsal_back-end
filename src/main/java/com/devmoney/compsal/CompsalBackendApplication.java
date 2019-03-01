@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.devmoney.compsal.Repository.AnotadorRepository;
 import com.devmoney.compsal.Repository.ArbitroRepository;
 import com.devmoney.compsal.Repository.EquipeRepository;
+import com.devmoney.compsal.Repository.GestorRepository;
 import com.devmoney.compsal.Repository.JogadorRepository;
 import com.devmoney.compsal.Repository.ResolucaoEquipeRepository;
 import com.devmoney.compsal.Repository.SumulaRepository;
@@ -18,6 +19,7 @@ import com.devmoney.compsal.Repository.TecnicoRepository;
 import com.devmoney.compsal.domain.Anotador;
 import com.devmoney.compsal.domain.Arbitro;
 import com.devmoney.compsal.domain.Equipe;
+import com.devmoney.compsal.domain.Gestor;
 import com.devmoney.compsal.domain.Jogador;
 import com.devmoney.compsal.domain.ResolucaoEquipe;
 import com.devmoney.compsal.domain.Sumula;
@@ -29,19 +31,21 @@ import com.devmoney.compsal.domain.enums.PerfilUsuario;
 public class CompsalBackendApplication implements CommandLineRunner {
 
 	@Autowired
-	private AnotadorRepository anotadorRepository;
+	private AnotadorRepository anotadorRepo;
 	@Autowired
-	private TecnicoRepository tecnicoRepository;
+	private TecnicoRepository tecnicoRepo;
 	@Autowired
-	private SumulaRepository sumulaRepository;
+	private SumulaRepository sumulaRepo;
 	@Autowired
-	private ArbitroRepository arbitroRepository;
+	private ArbitroRepository arbitroRepo;
 	@Autowired
-	private EquipeRepository equipeRepository;
+	private EquipeRepository equipeRepo;
 	@Autowired
-	private JogadorRepository jogadorRepository;
+	private JogadorRepository jogadorRepo;
 	@Autowired
-	private ResolucaoEquipeRepository resEquipeRepository;
+	private ResolucaoEquipeRepository resEquipeRepo;
+	@Autowired
+	private GestorRepository gestorRepo;
 	
 	
 	public static void main(String[] args) {
@@ -52,7 +56,9 @@ public class CompsalBackendApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
+		
+		Gestor gestor = new Gestor(null, "Alexandre Fulvia", "alex-Andre.F@gmail.com", "53328133", PerfilUsuario.GESTOR);
+		
 		Anotador ano1 = new Anotador(null, "Vinicius da Silva", "viniSil@gmail.com", "34455466", PerfilUsuario.ANOTADOR);
 		Anotador ano2 = new Anotador(null, "Henrique Ferreira", "heriqueF@gmail.com", "54465766",PerfilUsuario.ANOTADOR);
 				
@@ -110,16 +116,17 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		
 //---------------------------------------------------------------------------------------------------------		
 		
-		anotadorRepository.saveAll(Arrays.asList(ano1, ano2));
+		gestorRepo.save(gestor);
+		anotadorRepo.saveAll(Arrays.asList(ano1, ano2));
 		
-		arbitroRepository.saveAll(Arrays.asList(arb1, arb2, arb3, arb4, arb5));
-		sumulaRepository.saveAll(Arrays.asList(sumu1));
+		arbitroRepo.saveAll(Arrays.asList(arb1, arb2, arb3, arb4, arb5));
+		sumulaRepo.saveAll(Arrays.asList(sumu1));
 		
-		tecnicoRepository.saveAll(Arrays.asList(tecA, tecB));
-		equipeRepository.saveAll(Arrays.asList(equipeA, equipeB));
+		tecnicoRepo.saveAll(Arrays.asList(tecA, tecB));
+		equipeRepo.saveAll(Arrays.asList(equipeA, equipeB));
 		
-		resEquipeRepository.saveAll(Arrays.asList(resEquipeA, resEquipeB));
-		jogadorRepository.saveAll(Arrays.asList(joga1, joga2, joga3, joga4, joga5, jogb1, jogb2, jogb3, jogb4, jogb5));
+		resEquipeRepo.saveAll(Arrays.asList(resEquipeA, resEquipeB));
+		jogadorRepo.saveAll(Arrays.asList(joga1, joga2, joga3, joga4, joga5, jogb1, jogb2, jogb3, jogb4, jogb5));
 	}
 
 }
