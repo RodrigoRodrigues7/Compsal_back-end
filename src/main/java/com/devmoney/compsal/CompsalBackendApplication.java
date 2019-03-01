@@ -56,11 +56,8 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		Anotador ano1 = new Anotador(null, "Vinicius da Silva", "viniSil@gmail.com", "34455466", PerfilUsuario.ANOTADOR);
 		Anotador ano2 = new Anotador(null, "Henrique Ferreira", "heriqueF@gmail.com", "54465766",PerfilUsuario.ANOTADOR);
 				
-		Arbitro arb1 = new Arbitro(null, "Emmanuel Andrade");
-		arb1.addFuncao(FuncaoArbitro.PRINCIPAL);
-
-		Arbitro arb2 = new Arbitro(null, "Miguel Borges");
-		arb2.addFuncao(FuncaoArbitro.AUXILIAR);
+		Arbitro arb1 = new Arbitro(null, "Emmanuel Andrade", FuncaoArbitro.PRINCIPAL);
+		Arbitro arb2 = new Arbitro(null, "Miguel Borges", FuncaoArbitro.AUXILIAR);
 		
 		Sumula sumu1 = new Sumula(null, "Campeonato Pernambucano de Futsal S1", "1", "Sub-20", "Geraldão", "Recife", sdf.parse("27/02/2019 21:20"), ano1);
 		

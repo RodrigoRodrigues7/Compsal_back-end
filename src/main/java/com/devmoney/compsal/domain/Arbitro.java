@@ -2,13 +2,8 @@ package com.devmoney.compsal.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,17 +26,16 @@ public class Arbitro implements Serializable {
 	@ManyToMany(mappedBy="arbitros")
 	private List<Sumula> sumulas = new ArrayList<>();
 	
-	@ElementCollection
-	@CollectionTable(name="FUNCOES")
-	private Set<Integer> funcao = new HashSet<>();
+	private Integer funcao;
 	
 	public Arbitro() {
 	}
 
-	public Arbitro(Integer id, String nome) {
+	public Arbitro(Integer id, String nome, FuncaoArbitro funcao) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.funcao = (funcao==null) ? null : funcao.getCodigo();
 	}
 
 	public Integer getId() {
@@ -59,14 +53,6 @@ public class Arbitro implements Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public Set<FuncaoArbitro> getFuncao() {
-		return funcao.stream().map(x -> FuncaoArbitro.toEnum(x)).collect(Collectors.toSet());
-	}
-	
-	public void addFuncao(FuncaoArbitro funcaoArbitro) {
-		funcao.add(funcaoArbitro.getCodigo());
-	}
 	
 	public List<Sumula> getSumulas() {
 		return sumulas;
@@ -74,6 +60,14 @@ public class Arbitro implements Serializable {
 
 	public void setSumulas(List<Sumula> sumulas) {
 		this.sumulas = sumulas;
+	}
+
+	public FuncaoArbitro getFuncao() {
+		return FuncaoArbitro.toEnum(funcao);
+	}
+
+	public void setFuncaoArbitro(FuncaoArbitro funcao) {
+		this.funcao = funcao.getCodigo();
 	}
 
 	@Override
