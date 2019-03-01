@@ -58,6 +58,9 @@ public class CompsalBackendApplication implements CommandLineRunner {
 				
 		Arbitro arb1 = new Arbitro(null, "Emmanuel Andrade", FuncaoArbitro.PRINCIPAL);
 		Arbitro arb2 = new Arbitro(null, "Miguel Borges", FuncaoArbitro.AUXILIAR);
+		Arbitro arb3 = new Arbitro(null, "Mannolo Silva", FuncaoArbitro.AUXILIAR);
+		Arbitro arb4 = new Arbitro(null, "Evandro da Costa", FuncaoArbitro.AUXILIAR);
+		Arbitro arb5 = new Arbitro(null, "Júlio Alenmar", FuncaoArbitro.PRINCIPAL);
 		
 		Tecnico tecA = new Tecnico(null, "Zé Braga Neto", "zeze@gmail.com", "55566448", PerfilUsuario.TECNICO);
 		Tecnico tecB = new Tecnico(null, "Birimba", "birimbal123@gmail.com", "46789932", PerfilUsuario.TECNICO);
@@ -109,7 +112,7 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		
 		anotadorRepository.saveAll(Arrays.asList(ano1, ano2));
 		
-		arbitroRepository.saveAll(Arrays.asList(arb1, arb2));
+		arbitroRepository.saveAll(Arrays.asList(arb1, arb2, arb3, arb4, arb5));
 		sumulaRepository.saveAll(Arrays.asList(sumu1));
 		
 		tecnicoRepository.saveAll(Arrays.asList(tecA, tecB));
