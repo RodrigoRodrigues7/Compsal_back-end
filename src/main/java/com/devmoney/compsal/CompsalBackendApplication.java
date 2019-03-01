@@ -59,13 +59,10 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		Arbitro arb1 = new Arbitro(null, "Emmanuel Andrade", FuncaoArbitro.PRINCIPAL);
 		Arbitro arb2 = new Arbitro(null, "Miguel Borges", FuncaoArbitro.AUXILIAR);
 		
-		Sumula sumu1 = new Sumula(null, "Campeonato Pernambucano de Futsal S1", "1", "Sub-20", "Geraldão", "Recife", sdf.parse("27/02/2019 21:20"), ano1);
-		
 		Tecnico tecA = new Tecnico(null, "Zé Braga Neto", "zeze@gmail.com", "55566448", PerfilUsuario.TECNICO);
 		Tecnico tecB = new Tecnico(null, "Birimba", "birimbal123@gmail.com", "46789932", PerfilUsuario.TECNICO);
 		
-//		Equipe equipeA = new Equipe(null, "Sport", "Zé Braga Neto", "Felipe Souza", "Sérgio Menesez", sumu1);
-		Equipe equipeA = new Equipe(null, "Sport", "Felipe Souza", "Sérgio Menesez", sumu1);
+		Equipe equipeA = new Equipe(null, "Sport", "Felipe Souza", "Sérgio Menesez");
 		
 		Jogador joga1 = new Jogador(null, "Romário", "11", 14, equipeA, false);
 		Jogador joga2 = new Jogador(null, "Pelépo", "10", 4, equipeA, true);
@@ -77,8 +74,7 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		equipeA.setTecnico(tecA);
 		tecA.setEquipe(equipeA);
 		
-//		Equipe equipeB = new Equipe(null, "Santa Cruz", "Birimba", "Hernesto Mathias", "Flávio Assunção", sumu1);
-		Equipe equipeB = new Equipe(null, "Santa Cruz", "Hernesto Mathias", "Flávio Assunção", sumu1);
+		Equipe equipeB = new Equipe(null, "Santa Cruz", "Hernesto Mathias", "Flávio Assunção");
 		
 		Jogador jogb1 = new Jogador(null, "Fernando", "1", 0, equipeB, false);
 		Jogador jogb2 = new Jogador(null, "Nelson", "13", 15, equipeB, false);
@@ -90,8 +86,8 @@ public class CompsalBackendApplication implements CommandLineRunner {
 		equipeB.setTecnico(tecB);
 		tecB.setEquipe(equipeB);
 		
+		Sumula sumu1 = new Sumula(null, "Campeonato Pernambucano de Futsal S1", "1", equipeA.getNome() , equipeB.getNome(), "4", "2", "Sub-20", "Geraldão", "Recife", sdf.parse("27/02/2019 21:20"), ano1);
 		sumu1.getArbitros().addAll(Arrays.asList(arb1, arb2));
-		sumu1.getEquipes().addAll(Arrays.asList(equipeA, equipeB));
 		
 		ResolucaoEquipe resEquipeA = new ResolucaoEquipe(null, 2, 0, 1, 1, 6, equipeA);
 		ResolucaoEquipe resEquipeB = new ResolucaoEquipe(null, 0, 1, 3, 2, 12, equipeB);		

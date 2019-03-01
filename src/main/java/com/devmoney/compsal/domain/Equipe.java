@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -38,21 +37,15 @@ public class Equipe implements Serializable {
 	@OneToMany(mappedBy="equipe")
 	private List<ResolucaoEquipe> resolucoes = new ArrayList<>();
 	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name="Sumula_Id")
-	private Sumula sumula;
-	
 	public Equipe() {
 	}
 
-	public Equipe(Integer id, String nome, String massagista, String preparadorFisico, Sumula sumula) {
+	public Equipe(Integer id, String nome, String massagista, String preparadorFisico) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.massagista = massagista;
 		this.preparadorFisico = preparadorFisico;
-		this.sumula = sumula;
 	}
 
 	public Integer getId() {
@@ -109,14 +102,6 @@ public class Equipe implements Serializable {
 
 	public void setResolucoes(List<ResolucaoEquipe> resolucoes) {
 		this.resolucoes = resolucoes;
-	}
-
-	public Sumula getSumula() {
-		return sumula;
-	}
-
-	public void setSumula(Sumula sumula) {
-		this.sumula = sumula;
 	}
 
 	@Override

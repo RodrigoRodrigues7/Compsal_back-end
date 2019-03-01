@@ -27,6 +27,12 @@ public class Sumula implements Serializable {
 	
 	private String nomeCompeticao;
 	private String jogoNumero;
+	
+	private String nomeEquipeA;
+	private String nomeEquipeB;
+	private String placarEquipeA;
+	private String placarEquipeB;
+	
 	private String categoria;
 	private String ginasio;
 	private String cidade;
@@ -45,19 +51,20 @@ public class Sumula implements Serializable {
 	private Anotador anotador;
 	
 	@OneToMany(mappedBy="sumula")
-	private List<Equipe> equipes = new ArrayList<>();
-	
-	@OneToMany(mappedBy="sumula")
 	private List<ResolucaoEquipe> resolucoes = new ArrayList<>();
 	
 	public Sumula() {
 	}
 	
-	public Sumula(Integer id, String nomeCompeticao, String jogoNumero,String categoria, String ginasio, String cidade, Date data, Anotador anotador) {
+	public Sumula(Integer id, String nomeCompeticao, String jogoNumero, String nomeEquipeA, String nomeEquipeB, String placarEquipeA, String placarEquipeB, String categoria, String ginasio, String cidade, Date data, Anotador anotador) {
 		super();
 		this.id = id;
 		this.nomeCompeticao = nomeCompeticao;
 		this.jogoNumero = jogoNumero;
+		this.nomeEquipeA = nomeEquipeA;
+		this.nomeEquipeB = nomeEquipeB;
+		this.placarEquipeA = placarEquipeA;
+		this.placarEquipeB = placarEquipeB;
 		this.categoria = categoria;
 		this.ginasio = ginasio;
 		this.cidade = cidade;
@@ -87,6 +94,38 @@ public class Sumula implements Serializable {
 
 	public void setJogoNumero(String jogoNumero) {
 		this.jogoNumero = jogoNumero;
+	}
+
+	public String getNomeEquipeA() {
+		return nomeEquipeA;
+	}
+
+	public void setNomeEquipeA(String nomeEquipeA) {
+		this.nomeEquipeA = nomeEquipeA;
+	}
+
+	public String getNomeEquipeB() {
+		return nomeEquipeB;
+	}
+
+	public void setNomeEquipeB(String nomeEquipeB) {
+		this.nomeEquipeB = nomeEquipeB;
+	}
+
+	public String getPlacarEquipeA() {
+		return placarEquipeA;
+	}
+
+	public void setPlacarEquipeA(String placarEquipeA) {
+		this.placarEquipeA = placarEquipeA;
+	}
+
+	public String getPlacarEquipeB() {
+		return placarEquipeB;
+	}
+
+	public void setPlacarEquipeB(String placarEquipeB) {
+		this.placarEquipeB = placarEquipeB;
 	}
 
 	public Anotador getAnotador() {
@@ -135,15 +174,6 @@ public class Sumula implements Serializable {
 
 	public void setArbitros(List<Arbitro> arbitros) {
 		this.arbitros = arbitros;
-	}
-	
-	public List<Equipe> getEquipes() {
-		return equipes;
-	}
-
-
-	public void setEquipes(List<Equipe> equipes) {
-		this.equipes = equipes;
 	}
 
 	public List<ResolucaoEquipe> getResolucoes() {
